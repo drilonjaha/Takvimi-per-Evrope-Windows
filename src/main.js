@@ -27,20 +27,11 @@ function createWindow() {
 }
 
 function createTray() {
-  // Create a simple tray icon (moon/crescent symbol)
-  const iconPath = path.join(__dirname, '..', 'assets', 'tray-icon.png');
+  // Create tray icon - use embedded base64 icon for reliability
+  // This is a 16x16 green crescent moon icon
+  const iconBase64 = 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAABLUlEQVQ4y6WTMUoDQRSGv5ndhGyxYKFgYSEIgo1gYyHYiFh4AG/gBTyBhYXgCTyBIHgAK0ux8QoewEYLixQWFoIgCBYhyc7zN5NVk10Tt/jgMTP/+9+8mXkGOqj7qGz0YMFQFKAD84BFREYxQNY3yXojgKYGwJiIvIjIW1xPKl8r8AhcA5MdADMisioil8CViHyLyFRE3oFb4C6bfq+5QEQ2gbOkP6XBwDqwBmwAp8CXqqaJrgOPqnqfBniLOAZmgAPgWET2RWQFOBKRJVX9VtWXOCaIIRLhF7CiqjtAVUQ2VPVVRFaAQ2BRVT9U9TEJSEsBFoEjEVkDDoF5EdlW1QcRWQaOgTlV/UgCstIA5oADEVkFjoA5EdlS1XsRWQJOgFlVfQG+gJ/BNv4Czt0Ij6M3jlMAAAAASUVORK5CYII=';
 
-  // Try to load icon, fall back to default if not exists
-  let icon;
-  try {
-    icon = nativeImage.createFromPath(iconPath);
-    if (icon.isEmpty()) {
-      // Create a simple colored icon as fallback
-      icon = nativeImage.createEmpty();
-    }
-  } catch (e) {
-    icon = nativeImage.createEmpty();
-  }
+  const icon = nativeImage.createFromDataURL(`data:image/png;base64,${iconBase64}`);
 
   tray = new Tray(icon);
   tray.setToolTip('Takvimi per Evrope');
