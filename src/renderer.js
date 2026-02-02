@@ -145,13 +145,17 @@ async function fetchPrayerTimes() {
     const country = getCountry(city.country);
     const timezone = country?.timezone || 'Europe/Belgrade';
 
-    // Use BIM Kosovo calculation angles (18° Fajr, 17° Isha) for consistency
-    const methodSettings = '18,null,17';
+    // Get calculation settings based on country
+    const { methodSettings, tune } = getCalculationSettings(city.country, today);
 
-    const response = await fetch(
-      `https://api.aladhan.com/v1/timings/${dateStr}?latitude=${city.latitude}&longitude=${city.longitude}&method=99&methodSettings=${methodSettings}&timezonestring=${timezone}`
-    );
+    let url = `https://api.aladhan.com/v1/timings/${dateStr}?latitude=${city.latitude}&longitude=${city.longitude}&method=99&methodSettings=${methodSettings}&timezonestring=${timezone}`;
 
+    // Add tune parameter for IZRS Swiss adjustments
+    if (tune) {
+      url += `&tune=${tune}`;
+    }
+
+    const response = await fetch(url);
     const data = await response.json();
 
     if (data.code === 200) {
@@ -170,6 +174,33 @@ async function fetchPrayerTimes() {
   } catch (error) {
     console.error('Error fetching prayer times:', error);
   }
+}
+
+// Returns calculation settings based on country
+// Switzerland uses IZRS recommended settings (UOIF 12° with seasonal adjustments)
+// Source: https://www.izrs.ch/empirisch-fundierte-winkelbestimmung-definitive-gebetszeiten-fuer-die-schweiz.html
+function getCalculationSettings(countryCode, date) {
+  if (countryCode === 'CH') {
+    // IZRS Switzerland: UOIF angles (12°) with seasonal Fajr adjustments
+    const month = date.getMonth() + 1; // JS months are 0-indexed
+    const day = date.getDate();
+
+    // Sept 23 - March 20: -5 minutes, March 21 - Sept 22: -10 minutes
+    const isWinterPeriod = (month > 9 || month < 3 || (month === 9 && day >= 23) || (month === 3 && day <= 20));
+    const fajrAdjust = isWinterPeriod ? -5 : -10;
+
+    // tune format: Imsak,Fajr,Sunrise,Dhuhr,Asr,Maghrib,Isha,Midnight
+    return {
+      methodSettings: '12,null,12',
+      tune: `${fajrAdjust},${fajrAdjust},0,0,0,0,0,0`
+    };
+  }
+
+  // Default: BIM Kosovo angles for other countries
+  return {
+    methodSettings: '18,null,17',
+    tune: null
+  };
 }
 
 function updatePrayerTimesDisplay() {
