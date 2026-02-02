@@ -7,12 +7,14 @@ let mainWindow = null;
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 380,
-    height: 520,
+    height: 580,
+    minWidth: 320,
+    minHeight: 500,
     show: false,
-    frame: false,
-    resizable: false,
-    skipTaskbar: true,
-    alwaysOnTop: true,
+    frame: true,
+    resizable: true,
+    skipTaskbar: false,
+    alwaysOnTop: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
