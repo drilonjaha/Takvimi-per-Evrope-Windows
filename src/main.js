@@ -29,13 +29,20 @@ function createWindow() {
 }
 
 function createTray() {
-  // Create tray icon - use embedded base64 icon for reliability
-  // This is a 16x16 green crescent moon icon
-  const iconBase64 = 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAABLUlEQVQ4y6WTMUoDQRSGv5ndhGyxYKFgYSEIgo1gYyHYiFh4AG/gBTyBhYXgCTyBIHgAK0ux8QoewEYLixQWFoIgCBYhyc7zN5NVk10Tt/jgMTP/+9+8mXkGOqj7qGz0YMFQFKAD84BFREYxQNY3yXojgKYGwJiIvIjIW1xPKl8r8AhcA5MdADMisioil8CViHyLyFRE3oFb4C6bfq+5QEQ2gbOkP6XBwDqwBmwAp8CXqqaJrgOPqnqfBniLOAZmgAPgWET2RWQFOBKRJVX9VtWXOCaIIRLhF7CiqjtAVUQ2VPVVRFaAQ2BRVT9U9TEJSEsBFoEjEVkDDoF5EdlW1QcRWQaOgTlV/UgCstIA5oADEVkFjoA5EdlS1XsRWQJOgFlVfQG+gJ/BNv4Czt0Ij6M3jlMAAAAASUVORK5CYII=';
+  // Load tray icon from file - check both dev and production paths
+  let iconPath = path.join(__dirname, '..', 'assets', 'tray-icon.png');
 
-  const icon = nativeImage.createFromDataURL(`data:image/png;base64,${iconBase64}`);
+  // In production, assets are in extraResources
+  if (!require('fs').existsSync(iconPath)) {
+    iconPath = path.join(process.resourcesPath, 'assets', 'tray-icon.png');
+  }
 
-  tray = new Tray(icon);
+  const icon = nativeImage.createFromPath(iconPath);
+
+  // Resize for Windows tray (16x16 works best)
+  const resizedIcon = icon.resize({ width: 16, height: 16 });
+
+  tray = new Tray(resizedIcon);
   tray.setToolTip('Takvimi per Evrope');
 
   tray.on('click', (event, bounds) => {

@@ -13,11 +13,13 @@
   "build": {
     "appId": "com.takvimi.evrope",
     "productName": "Takvimi per Evrope",
+    "icon": "assets/icon.png",
     "directories": {
       "output": "dist"
     },
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "assets/icon.png"
     },
     "mac": {
       "target": "dmg"
@@ -32,14 +34,27 @@
     "files": [
       "src/**/*",
       "assets/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "assets",
+        "to": "assets"
+      }
     ]
   },
-  "keywords": ["prayer", "times", "islamic", "takvim", "namaz"],
+  "keywords": [
+    "prayer",
+    "times",
+    "islamic",
+    "takvim",
+    "namaz"
+  ],
   "author": "Drilon",
   "license": "MIT",
   "devDependencies": {
     "electron": "^40.1.0",
-    "electron-builder": "^26.7.0"
+    "electron-builder": "^26.7.0",
+    "sharp": "^0.34.5"
   },
   "dependencies": {
     "node-fetch": "^2.7.0"
