@@ -196,6 +196,16 @@ function getCalculationSettings(countryCode, date) {
     };
   }
 
+  if (countryCode === 'XK') {
+    // Kosovo: BIM angles with +9 minute correction
+    // The base calculation was 9 minutes early compared to actual observed times
+    // tune format: Imsak,Fajr,Sunrise,Dhuhr,Asr,Maghrib,Isha,Midnight
+    return {
+      methodSettings: '18,null,17',
+      tune: '9,9,9,9,9,9,9,0'
+    };
+  }
+
   // Default: BIM Kosovo angles for other countries
   return {
     methodSettings: '18,null,17',
