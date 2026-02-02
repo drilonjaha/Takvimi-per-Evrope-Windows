@@ -1,17 +1,17 @@
 const countries = [
-  { code: 'XK', name: 'Kosova', flag: '🇽🇰' },
-  { code: 'CH', name: 'Zvicra', flag: '🇨🇭' },
-  { code: 'DE', name: 'Gjermania', flag: '🇩🇪' },
-  { code: 'AT', name: 'Austria', flag: '🇦🇹' },
-  { code: 'FR', name: 'Franca', flag: '🇫🇷' },
-  { code: 'NL', name: 'Holanda', flag: '🇳🇱' },
-  { code: 'BE', name: 'Belgjika', flag: '🇧🇪' },
-  { code: 'SE', name: 'Suedia', flag: '🇸🇪' },
-  { code: 'NO', name: 'Norvegjia', flag: '🇳🇴' },
-  { code: 'DK', name: 'Danimarka', flag: '🇩🇰' },
-  { code: 'GB', name: 'Britania', flag: '🇬🇧' },
-  { code: 'IT', name: 'Italia', flag: '🇮🇹' },
-  { code: 'FI', name: 'Finlanda', flag: '🇫🇮' }
+  { code: 'XK', name: 'Kosova', flag: '🇽🇰', timezone: 'Europe/Belgrade' },
+  { code: 'CH', name: 'Zvicra', flag: '🇨🇭', timezone: 'Europe/Zurich' },
+  { code: 'DE', name: 'Gjermania', flag: '🇩🇪', timezone: 'Europe/Berlin' },
+  { code: 'AT', name: 'Austria', flag: '🇦🇹', timezone: 'Europe/Vienna' },
+  { code: 'FR', name: 'Franca', flag: '🇫🇷', timezone: 'Europe/Paris' },
+  { code: 'NL', name: 'Holanda', flag: '🇳🇱', timezone: 'Europe/Amsterdam' },
+  { code: 'BE', name: 'Belgjika', flag: '🇧🇪', timezone: 'Europe/Brussels' },
+  { code: 'SE', name: 'Suedia', flag: '🇸🇪', timezone: 'Europe/Stockholm' },
+  { code: 'NO', name: 'Norvegjia', flag: '🇳🇴', timezone: 'Europe/Oslo' },
+  { code: 'DK', name: 'Danimarka', flag: '🇩🇰', timezone: 'Europe/Copenhagen' },
+  { code: 'GB', name: 'Britania', flag: '🇬🇧', timezone: 'Europe/London' },
+  { code: 'IT', name: 'Italia', flag: '🇮🇹', timezone: 'Europe/Rome' },
+  { code: 'FI', name: 'Finlanda', flag: '🇫🇮', timezone: 'Europe/Helsinki' }
 ];
 
 const cities = [

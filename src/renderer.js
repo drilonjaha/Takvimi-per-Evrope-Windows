@@ -141,8 +141,15 @@ async function fetchPrayerTimes() {
     const today = new Date();
     const dateStr = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`;
 
+    // Get timezone for the city's country
+    const country = getCountry(city.country);
+    const timezone = country?.timezone || 'Europe/Belgrade';
+
+    // Use BIM Kosovo calculation angles (18° Fajr, 17° Isha) for consistency
+    const methodSettings = '18,null,17';
+
     const response = await fetch(
-      `https://api.aladhan.com/v1/timings/${dateStr}?latitude=${city.latitude}&longitude=${city.longitude}&method=3`
+      `https://api.aladhan.com/v1/timings/${dateStr}?latitude=${city.latitude}&longitude=${city.longitude}&method=99&methodSettings=${methodSettings}&timezonestring=${timezone}`
     );
 
     const data = await response.json();
