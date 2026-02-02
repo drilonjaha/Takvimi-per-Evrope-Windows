@@ -26,7 +26,7 @@ Aplikacion per Windows qe shfaq kohet e namazit per qytetet ne Evrope. Perdor Al
 
 ## Shkarko
 
-**[Shkarko Takvimi-Setup.exe](https://github.com/drilonjaha/Takvimi-per-Evrope-Windows/releases/latest/download/Takvimi-per-Evrope-Setup.exe)**
+**[Shkarko Takvimi.per.Evrope.Setup.exe](https://github.com/drilonjaha/Takvimi-per-Evrope-Windows/releases/latest/download/Takvimi.per.Evrope.Setup.1.0.0.exe)**
 
 Ose shko te faqja [Releases](https://github.com/drilonjaha/Takvimi-per-Evrope-Windows/releases).
 
